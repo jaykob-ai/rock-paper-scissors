@@ -5,16 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/8867efb1ae.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <button class="rock">Rock</button>
-    <button class="paper">Paper</button>
-    <button class="scissors">Scissors</button>
-    <div class="player"></div>
-    <div class="computer"></div>
-    <div class="results"></div>
-    <div class="score"></div>
-    <button class="again">Play again</button>
-    <script src="app.js"></script>
+    <div class="section">
+        <div class="computerIcon">
+            <div id="computerRock">
+              <span><i class="fa-regular fa-hand-back-fist" id="enemyRockIcon"></i></span>
+            </div>
+            <div id="computerPaper">
+              <span><i class="fa-regular fa-hand" id="enemyPaperIcon"></i></span>
+            </div>
+            <div id="computerScissors">
+              <span><i class="fa-regular fa-hand-scissors" id="enemyScissorsIcon"></i></span>
+            </div>
+          </div>          
+        <div class="rps">
+            <button id="rock" class="rps-button"><i class="fa-regular fa-hand-back-fist"></i></button>
+            <button id="paper" class="rps-button"><i class="fa-regular fa-hand"></i></button>
+            <button id="scissors" class="rps-button"><i class="fa-regular fa-hand-scissors"></i></button>
+        </div>
+        <div class="text">
+            <div class="score"></div>
+            <div hidden id="lossMessage">LOST</div>
+            <div hidden id="winMessage">WON</div>
+        </div>
+        <button class="playAgain">Play again</button>
+        <script src="app.js"></script>
+    </div>
 </body>
 </html>

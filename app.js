@@ -4,6 +4,8 @@ let scoreComputer = 0;
 let roundMessage;
 let playerSelection;
 let gameGoing = true;
+let section = document.querySelector('.section');
+let text = document.querySelector('.text');
 
 function getComputerChoice() {
     let randomNumber = Math.floor(Math.random() * 3) + 1;
@@ -16,39 +18,84 @@ function getComputerChoice() {
     return computerSelection;
 }
 
+function getComputerIcon() {
+  let x;
+  if (computerSelection === 'rock') {
+    x = document.getElementById('computerRock');
+    x.style.display = 'block';
+  }
+  else if (computerSelection === 'paper') {
+    x = document.getElementById('computerPaper');
+    x.style.display = 'block';
+  }
+  else {
+    x = document.getElementById('computerScissors');
+    x.style.display = 'block';
+  };
+}
+
+function resetIcons() {
+  document.getElementById('computerRock').style.display = 'none';
+  document.getElementById('computerPaper').style.display = 'none';
+  document.getElementById('computerScissors').style.display = 'none';
+}
+
+function resetWinLossMessage() {
+  document.getElementById('winMessage').style.display = 'none';
+  document.getElementById('lossMessage').style.display = 'none';
+}
+
+function showLoss() {
+  let loss = document.createElement('div');
+  loss.classList.add('lossMessage');
+  loss.textContent = 'LOST';
+  loss.style.textAlign = 'center';
+  loss.style.fontSize = '5rem';
+  text.appendChild(loss);
+}
+
+function showWin() {
+  let x = document.getElementById('winMessage');
+  x.style.display = 'block';
+}
+
+function showLoss() {
+  let x = document.getElementById('lossMessage');
+  x.style.display = 'block';
+}
+
 function playRound(playerSelection) {
   if (gameGoing === true) {
+    resetIcons();
     getComputerChoice();
+    getComputerIcon();
 
     if (playerSelection === 'rock' & computerSelection === 'paper' ||
         playerSelection === 'paper' & computerSelection === 'scissors' ||
         playerSelection === 'scissors' & computerSelection === 'rock') {
       ++scoreComputer;
-    roundMessage = 'You lost this Round! ' + computerSelection + ' beats ' + playerSelection;
+      section.style.background = 'crimson';
     } else if (playerSelection === 'rock' & computerSelection === 'scissors' ||
                 playerSelection === 'paper' & computerSelection === 'rock' ||
                 playerSelection === 'scissors' & computerSelection === 'paper') {
       ++scorePlayer;
-      roundMessage = 'You won this Round! ' + playerSelection + ' beats ' + computerSelection;
+      section.style.background = 'green';
     } else {
-      roundMessage = 'This round is a draw!';
+      section.style.background = 'yellow';
     }
-    
-    let player = document.querySelector('.player');
-    player.textContent = 'You chose: ' + playerSelection;
-    let computer = document.querySelector('.computer');
-    computer.textContent = 'Computer chose: ' + computerSelection;
 
     let score = document.querySelector('.score');
-    score.textContent = 'Player: ' + scorePlayer + ', Computer: ' + scoreComputer;
-    let results = document.querySelector('.results');
-    results.textContent = roundMessage;
+    score.textContent = scorePlayer + ' : ' + scoreComputer;
 
     if (scorePlayer === 5) {
-      score.textContent = 'Player: ' + scorePlayer + ', Computer: ' + scoreComputer + '. Game is over! You won!';
+      score.textContent = scorePlayer + ' : ' + scoreComputer;
+      section.style.background = 'greenyellow';
+      showWin();
       return gameGoing = false;
     } else if (scoreComputer === 5) {
-      score.textContent = 'Player: ' + scorePlayer + ', Computer: ' + scoreComputer + '. Game is over! You lost!';
+      score.textContent = scorePlayer + ' : ' + scoreComputer;
+      section.style.background = 'red';
+      showLoss();
       return gameGoing = false;
     }
   }
@@ -64,25 +111,24 @@ function playRound(playerSelection) {
     return score;
 }*/
 
-const rock = document.querySelector('.rock');
-const paper = document.querySelector('.paper');
-const scissors = document.querySelector('.scissors');
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
 
 rock.addEventListener('click', () => playRound('rock'));
 paper.addEventListener('click', () => playRound('paper'));
 scissors.addEventListener('click', () => playRound('scissors'));
 
-const again = document.querySelector('.again');
-  again.addEventListener('click', () => {
+const playAgain = document.querySelector('.playAgain');
+playAgain.addEventListener('click', () => {
     scorePlayer = 0;
     scoreComputer = 0;
     gameGoing = true;
-    player = document.querySelector('.player');
-    player.textContent = '';
-    computer = document.querySelector('.computer');
-    computer.textContent = '';
-    results = document.querySelector('.results');
-    results.textContent = '';
     score = document.querySelector('.score');
     score.textContent = '';
-  });
+    section.style.background = 'white';
+    resetIcons();
+    resetWinLossMessage();
+});
+
+
