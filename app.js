@@ -34,10 +34,14 @@ function playRound(playerSelection) {
       roundMessage = 'This round is a draw!';
     }
     
+    let player = document.querySelector('.player');
+    player.textContent = 'You chose: ' + playerSelection;
+    let computer = document.querySelector('.computer');
+    computer.textContent = 'Computer chose: ' + computerSelection;
 
-    const score = document.querySelector('.score');
+    let score = document.querySelector('.score');
     score.textContent = 'Player: ' + scorePlayer + ', Computer: ' + scoreComputer;
-    const results = document.querySelector('.results');
+    let results = document.querySelector('.results');
     results.textContent = roundMessage;
 
     if (scorePlayer === 5) {
@@ -47,7 +51,7 @@ function playRound(playerSelection) {
       score.textContent = 'Player: ' + scorePlayer + ', Computer: ' + scoreComputer + '. Game is over! You lost!';
       return gameGoing = false;
     }
-  }  
+  }
 }
 
 /*function game() {
@@ -67,3 +71,18 @@ const scissors = document.querySelector('.scissors');
 rock.addEventListener('click', () => playRound('rock'));
 paper.addEventListener('click', () => playRound('paper'));
 scissors.addEventListener('click', () => playRound('scissors'));
+
+const again = document.querySelector('.again');
+  again.addEventListener('click', () => {
+    scorePlayer = 0;
+    scoreComputer = 0;
+    gameGoing = true;
+    player = document.querySelector('.player');
+    player.textContent = '';
+    computer = document.querySelector('.computer');
+    computer.textContent = '';
+    results = document.querySelector('.results');
+    results.textContent = '';
+    score = document.querySelector('.score');
+    score.textContent = '';
+  });
